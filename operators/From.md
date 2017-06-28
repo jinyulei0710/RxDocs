@@ -20,29 +20,26 @@
 
 ```java
 
-Integer[] items = { 0, 1, 2, 3, 4, 5 };
-Observable myObservable = Observable.from(items);
-
-myObservable.subscribe(
-    new Action1<Integer>() {
-        @Override
-        public void call(Integer item) {
-            System.out.println(item);
-        }
-    },
-    new Action1<Throwable>() {
-        @Override
-        public void call(Throwable error) {
-            System.out.println("Error encountered: " + error.getMessage());
-        }
-    },
-    new Action0() {
-        @Override
-        public void call() {
-            System.out.println("Sequence complete");
-        }
-    }
-);
+Integer[] items = {0, 1, 2, 3, 4, 5};
+        Observable myObservable = Observable.fromArray(items);
+        myObservable.subscribe(new Consumer<Integer>() {
+                                   @Override
+                                   public void accept(@NonNull Integer integer) throws Exception {
+                                       System.out.println(integer);
+                                   }
+                               },
+                new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable error) throws Exception {
+                        System.out.println("Error encountered: " + error.getMessage());
+                    }
+                },
+                new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        System.out.println("Sequence complete");
+                    }
+                });
 
 ```
 

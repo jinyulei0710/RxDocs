@@ -18,23 +18,29 @@ RxJava将这个操作符实现为`just`函数，它接受一至九个参数，�
 
 ```java
 
-Observable.just(1, 2, 3)
-          .subscribe(new Subscriber<Integer>() {
-        @Override
-        public void onNext(Integer item) {
-            System.out.println("Next: " + item);
-        }
+ Observable.just(1, 2, 3)
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
-        @Override
-        public void onError(Throwable error) {
-            System.err.println("Error: " + error.getMessage());
-        }
+                    }
 
-        @Override
-        public void onCompleted() {
-            System.out.println("Sequence complete.");
-        }
-    });
+                    @Override
+                    public void onNext(Integer item) {
+                        System.out.println("Next: " + item);
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+                        System.err.println("Error: " + error.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        System.out.println("Sequence complete.");
+
+                    }
+                });
 
 ```
 
